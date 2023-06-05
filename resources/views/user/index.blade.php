@@ -1,43 +1,51 @@
 @extends('layouts.main')
 
 @section('content')
-<main>
-    <div class="container-fluid px-4">
-        <h1 class="my-4">User</h1>
-        <div class="card mb-4">
-            <div class="card-body">
-                <table id="datatablesSimple" class="table table-striped">
-                    <thead class="table-secondary">
-                      <tr>
-                        <th>#</th>
-                        <th>Action</th>
-                        <th>Avatar</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center">1</td>
-                        <td>
-                          <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
-                          <button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button>
-                          <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                        </td>
-                        <td>Avatar</td>
-                        <td>Name</td>
-                        <td>Email</td>
-                        <td>Role</td>
-                        <td>Phone</td>
-                        <td>Address</td>
-                      </tr>
-                    </tbody>
-                  </table>
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="my-4">User</h1>
+
+            <a href="{{ route('user.create') }}" class="btn btn-primary mb-2">Create User</a>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table id="dataTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Avatar</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="https://placehold.co/50x50" alt="avatar">
+                                    </td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>{{ $user->role->name }}</td>
+                                    <td>
+                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 @endsection
