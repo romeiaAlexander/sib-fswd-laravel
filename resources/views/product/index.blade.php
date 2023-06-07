@@ -5,7 +5,9 @@
         <div class="container-fluid px-4">
             <h1 class="my-4">Product</h1>
 
+            @if (Auth::user()->role->name == 'Admin')
             <a class="btn btn-primary mb-2" href="{{ route('product.create') }}" role="button">Create New</a>
+            @endif
 
             <div class="card mb-4">
                 <div class="card-body">
@@ -18,7 +20,9 @@
                                 <th>Price</th>
                                 <th>Sale Price</th>
                                 <th>Image</th>
+                                @if (Auth::user()->role->name == 'Admin')
                                 <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +40,7 @@
                                             <img src="{{ asset('storage/product/' . $product->image) }}" alt="{{ $product->name }}" style="max-width: 50px">
                                         @endif
                                     </td>
+                                    @if (Auth::user()->role->name == 'Admin')
                                     <td>
                                         <form onsubmit="return confirm('Are you sure? ');" action="{{ route('product.destroy', $product->id) }}" method="POST">
                                             <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -45,6 +50,7 @@
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

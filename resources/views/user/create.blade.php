@@ -29,8 +29,11 @@
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
-
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="password" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{ route('user.index') }}" class="btn btn-secondary">Cancel</a>
