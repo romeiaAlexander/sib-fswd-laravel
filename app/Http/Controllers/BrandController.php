@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -30,6 +31,14 @@ class BrandController extends Controller
         $brand = Brand::create([
             'name' => $request->name,
         ]);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
 
         // alihkan halaman ke halaman brands
         return redirect()->route('brand.index');

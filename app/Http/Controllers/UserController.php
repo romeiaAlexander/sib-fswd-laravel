@@ -6,9 +6,12 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+
     public function index()
     {
         // Ambil semua data user dari database
@@ -37,6 +40,18 @@ class UserController extends Controller
             'role_id' => $request->role,
             'password' => Hash::make($request->password),
         ]);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'email' => 'required|string',
+            'phone' => 'required|integer',
+            'role_id' => 'required|integer',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
 
         // Redirect ke halaman user.index
         return redirect()->route('user.index');

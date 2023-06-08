@@ -14,6 +14,9 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{ route('brand.index') }}" class="btn btn-secondary">Cancel</a>

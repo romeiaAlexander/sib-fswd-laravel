@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -26,6 +27,13 @@ class RoleController extends Controller
             'name' => $request->name,
         ]);
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
         // alihkan halaman ke halaman roles
         return redirect()->route('role.index');
     }

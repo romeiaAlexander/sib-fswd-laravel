@@ -14,16 +14,25 @@
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required>
+                        @error('title')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="caption" class="form-label">Caption</label>
                             <input type="text" class="form-control" id="caption" name="caption" required>
+                        @error('caption')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Slider Image</label>
                             <input class="form-control" type="file" name="image" id="image" accept=".jpg, .jpeg, .png., .webp">
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
