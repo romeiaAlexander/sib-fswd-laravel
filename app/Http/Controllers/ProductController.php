@@ -29,6 +29,11 @@ class ProductController extends Controller
 
         $related = Product::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
 
+        if ($product->category->id = null) {
+            abort(404);
+        }
+
+
         if ($product) {
             return view('product.show', compact('product', 'related'));
         } else {

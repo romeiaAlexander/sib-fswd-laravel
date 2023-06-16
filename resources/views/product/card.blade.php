@@ -28,7 +28,7 @@
                                                 <h5 class="fw-bolder">{{ $product->name }}</h5>
                                             </a>
                                             <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="d-flex justify-cog; ntent-center small text-warning mb-2">
                                                 @for ($i = 0; $i < $product->rating; $i++)
                                                     <div class="bi-star-fill"></div>
                                                 @endfor
